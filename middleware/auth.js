@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken');
 class auth{
 
     //method create token
-    static getGenerateAccessToken(username,email){
-        return jwt.sign({"username":username,"email":email},process.env.ACCESS_TOKEN_KEY,{expiresIn:"3m",algorithm:"HS256" })
+    static getGenerateAccessToken(username,email,isAdmin){
+        return jwt.sign({"username":username,"email":email,"isAdmin":isAdmin},process.env.ACCESS_TOKEN_KEY,{expiresIn:"3m",algorithm:"HS256" })
     }
-    static getGenerateRefreshToken(username,email){
-        return jwt.sign({"username":username,"email":email},process.env.REFRESH_TOKEN_KEY,{expiresIn:"1d",algorithm:"HS256" })
+    static getGenerateRefreshToken(username,email,isAdmin){
+        return jwt.sign({"username":username,"email":email,"isAdmin":isAdmin},process.env.REFRESH_TOKEN_KEY,{expiresIn:"1d",algorithm:"HS256" })
     }
     static getExpirDate(token){
         const decodedToken = jwt.decode(token, { complete: true });

@@ -57,8 +57,8 @@ router.post('/auth/login',(req,res)=>{
         const login = await encrypt.check(Password,result.Password);
         if(login){
             //create TOKEN
-            const accessToken = auth.getGenerateAccessToken(result.Username,Email);
-            const refreshToken = auth.getGenerateRefreshToken(result.Username,Email);
+            const accessToken = auth.getGenerateAccessToken(result.Username,Email,result.isAdmin);
+            const refreshToken = auth.getGenerateRefreshToken(result.Username,Email,result.isAdmin);
             const expiryrefreshToken = auth.getExpirDate(refreshToken);
 
             //check if User already has token
@@ -111,6 +111,7 @@ router.post('/auth/register',(req,res)=>{
                 Username: Username,
                 Email: Email,
                 Password: encryptedPassword,
+                isAdmin:true
             })
             //save user to database
             newUser.save().then(result =>{

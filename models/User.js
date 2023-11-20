@@ -6,6 +6,7 @@ let userSchema = mongoose.Schema({
     Username:String,
     Email:String,
     Password:String,
+    isAdmin:Boolean
 });
 
 //create model
